@@ -1,34 +1,42 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 
 @Controller('events')
-export class EventsController {
+export class EventsController 
+{
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
-  create(@Body() createEventDto: CreateEventDto) {
+  create(@Body() createEventDto: CreateEventDto) 
+  {
     return this.eventsService.create(createEventDto);
   }
 
   @Get()
-  findAll() {
+  findAll() 
+  {
     return this.eventsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.eventsService.findById(+id);
+  findOne(@Param('id') id: number) 
+  {
+    return this.eventsService.findById(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-    return this.eventsService.update(+id, updateEventDto);
+  update(
+    @Param('id' , ParseIntPipe) id: number, 
+    @Body() updateEventDto: UpdateEventDto) 
+  {
+    return this.eventsService.update(id, updateEventDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.eventsService.delete(+id);
+  remove(@Param('id', ParseIntPipe) id: number) 
+  {
+    return this.eventsService.delete(id);
   }
 }

@@ -3,6 +3,7 @@ import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
+
 @Injectable()
 export class EventsService 
 {
@@ -10,17 +11,17 @@ export class EventsService
 
   async create(createEventDto: CreateEventDto) 
   {
-    return this.prisma.user.create({ data: createEventDto })
+    return this.prisma.event.create({ data: createEventDto })
   }
 
   async findAll() 
   {
-    return this.prisma.user.findMany();
+    return this.prisma.event.findMany();
   }
 
   async findById(id: number) 
   {
-    const user = await this.prisma.user.findUnique({ where: { id: id } });
+    const user = await this.prisma.event.findUnique({ where: { id: id } });
         
     if(!user) throw new NotFoundException(`User with ID ${id} not found.`);
     return user; 
@@ -30,7 +31,7 @@ export class EventsService
   {
     await this.findById(id);
 
-    return this.prisma.user.update({
+    return this.prisma.event.update({
       where: { id: id },
       data: updateEventDto,
     })
@@ -40,7 +41,7 @@ export class EventsService
   {
     await this.findById(id);
 
-    return this.prisma.user.delete({
+    return this.prisma.event.delete({
       where: { id: id },
     })
   }

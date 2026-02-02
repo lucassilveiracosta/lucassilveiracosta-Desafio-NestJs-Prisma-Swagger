@@ -1,7 +1,9 @@
+import { Status } from "@prisma/client";
 import { Type } from "class-transformer";
-import { IsDate, IsString } from "class-validator";
+import { IsDate, IsEnum, IsNumber, IsString } from "class-validator";
 
-export class CreateEventDto {
+export class CreateEventDto 
+{
     @IsString()
     title: string;
     @IsString()
@@ -12,6 +14,8 @@ export class CreateEventDto {
     @IsDate()
     @Type(() => Date)
     endDateTime: Date; 
-    @IsString()
-    status: string;
+    @IsEnum(Status)
+    status?: Status;  //-----> ? para tornar o campo opcional
+    @IsNumber()
+    userId: number;
 }
