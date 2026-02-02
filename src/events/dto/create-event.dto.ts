@@ -12,4 +12,6 @@ export class CreateEventDto {
     @IsDate()
     @Type(() => Date)
     endDateTime: Date; 
+    @IsString()
+    status: string;
 }
