@@ -1,7 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { error } from 'node:console';
 
 
 @Injectable()
@@ -16,11 +17,18 @@ export class EventsService
       userId: createEventDto.userId,
     }})
 
+    const { startDateTime, endDateTime } = createEventDto;
+
+    if(new Date(endDateTime) <= new Date(startDateTime))
+    {
+      throw new BadRequestException(`Você tem que usar uma data de término após a data de início!`);
+    }
+
     if(conflict)
     {
       throw new ConflictException(`Você ja possui um evento agendado nesse horario!`)
     }
-    
+
     return this.prisma.event.create({ data: createEventDto })
   }
 
