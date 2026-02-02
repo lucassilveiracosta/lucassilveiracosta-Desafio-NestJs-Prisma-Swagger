@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -11,6 +11,16 @@ export class EventsService
 
   async create(createEventDto: CreateEventDto) 
   {
+    const conflict = await this.prisma.event.findFirst({ where: {
+      startDateTime: createEventDto.startDateTime ,
+      userId: createEventDto.userId,
+    }})
+
+    if(conflict)
+    {
+      throw new ConflictException(`Você ja possui um evento agendado nesse horario!`)
+    }
+    
     return this.prisma.event.create({ data: createEventDto })
   }
 
