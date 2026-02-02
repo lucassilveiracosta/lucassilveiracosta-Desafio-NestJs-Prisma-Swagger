@@ -7,7 +7,7 @@ export class CreateEventDto
     @IsString()
     title: string;
     @IsString()
-    descrption: string;
+    description: string;
     @IsDate()
     @Type(() => Date)
     startDateTime: Date;
