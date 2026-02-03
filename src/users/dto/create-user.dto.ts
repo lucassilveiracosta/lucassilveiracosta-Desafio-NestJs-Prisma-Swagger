@@ -7,7 +7,7 @@ export class CreateUserDto {
     @IsString()  //Decorator para verificar se é String
     email: string;
 
-    @ApiProperty({ example: 'Pablo Picasso', description: 'Nome do usuário' })
+    @ApiProperty({ example: 'Fulano de Tal', description: 'Nome do usuário' })
     @IsString()
     fullName: string;
 
