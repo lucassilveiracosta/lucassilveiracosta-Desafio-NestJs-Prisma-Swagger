@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreateUser } from './users.swagger';
 
 @ApiTags('users')
 @Controller('users')
@@ -11,9 +12,7 @@ export class UsersController
   constructor(private readonly usersService: UsersService) {}
 
   @Post()//REQ
-  @ApiOperation({ summary: 'Rota para criar um usuário.' })
-  @ApiResponse({ status: 201, description: 'Usuário criado com sucesso!' })
-  @ApiResponse({ status: 400, description: 'Erro ao criar usuário! '})
+  @ApiCreateUser()
   create(@Body() createUserDto: CreateUserDto) 
   {
     return this.usersService.create(createUserDto);
