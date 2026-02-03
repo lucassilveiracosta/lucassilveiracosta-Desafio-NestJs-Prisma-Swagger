@@ -1,5 +1,5 @@
 import { applyDecorators } from "@nestjs/common";
-import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
 
 //Criando um único decorator
 export function ApiCreateUser() {
@@ -24,6 +24,74 @@ export function ApiCreateUser() {
             },
         }),
         ApiResponse({ status: 400, description: 'Erro ao criar usuário!' }),
+        ApiResponse({ status: 500, description: 'Erro interno no servidor' })
+    )
+}
+
+
+export function ApiGetUser() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Rota para exibir todos os usuários', description: 'Endpoint para listar todos os usuários' }),
+        ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso!' }),
+        ApiResponse({ status: 404, description: 'Nenhum usuário encontrado.' }),
+        ApiResponse({ status: 500, description: 'Erro interno no servidor' })
+    )
+}
+
+
+export function ApiGetOneUserById() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Rota para exibir um usuário por ID.', description: 'Endpoint para listar o usuário pelo ID' }),
+        ApiParam({
+            name: 'id',
+            description: 'ID do usuário',
+            example: 1,
+        }),
+        ApiResponse({ status: 200, description: `Usuário retornado com sucesso!` }),
+        ApiResponse({ status: 404, description: 'Nenhum usuário encontrado com esse ID.' }),
+        ApiResponse({ status: 500, description: 'Erro interno no servidor' })
+    )
+}
+
+
+export function ApiGetOneUserByEmail() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Rota para exibir um usuário por Email.', description: 'Endpoint para listar o usuário pelo E-mail' }),
+        ApiParam({
+            name: 'email',
+            description: 'e-mail do usuário',
+            example: 'example@email.com'
+        }),
+        ApiResponse({ status: 200, description: `Usuário retornado com sucesso!` }),
+        ApiResponse({ status: 404, description: 'Nenhum usuário encontrado com esse Email.' }),
+        ApiResponse({ status: 500, description: 'Erro interno no servidor' })
+    )
+}
+
+
+export function ApiPutUser() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Rota para atualizar um usuário pelo ID.', description: 'Endpoint para atualizar um usuário pelo ID' }),
+        ApiParam({
+            name: 'id',
+            description: 'ID do usuário a ser editado'
+            }),
+        ApiResponse({ status: 200, description: `Usuário atualizado com sucesso!` }),
+        ApiResponse({ status: 404, description: 'Nenhum usuário encontrado com esse ID.' }),
+        ApiResponse({ status: 500, description: 'Erro interno no servidor' })
+    )
+}
+
+
+export function ApiDeleteUser() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Rota para deletar um usuário pelo ID.', description: 'Endpoint para deletar um usuário pelo ID' }),
+        ApiParam({
+            name: 'id',
+            description: 'ID do usuário a ser deletado'
+        }),
+        ApiResponse({ status: 200, description: `Usuário deletado com sucesso!` }),
+        ApiResponse({ status: 404, description: 'Nenhum usuário encontrado com esse ID.' }),
         ApiResponse({ status: 500, description: 'Erro interno no servidor' })
     )
 }
