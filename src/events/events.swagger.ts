@@ -59,8 +59,25 @@ export function ApiPutEvent() {
         ApiParam({
             name: 'id',
             description: 'ID do evento a ser editado'
-            }),
-        ApiResponse({ status: 200, description: `Evento atualizado com sucesso!` }),
+        }),
+        ApiResponse({ 
+            status: 200,
+            description: `Evento atualizado com sucesso!`,
+            schema: {
+                type: 'object',
+                properties: {
+                    id: { type: 'number', example: 1 },
+                    title: { type: 'string', example: 'Férias' },
+                    description: { type: 'string', example: 'Praia do Pina' },
+                    startDateTime: { type: 'string', example: 'AAAA-MM-DD'},
+                    endDateTime: { type: 'string', example: 'AAAA-MM-DD' },
+                    status: { type: 'Status', example: 'SCHEDULED or COMPLETED or CANCELED' },
+                    userId: { type: 'number', example: 1 },
+                    createdAt: { type: 'string', example: 'AAAA-MM-DD' },
+                    updatedAt: { type: 'string', example: '+AAAA-+MM-+DD' }
+                }
+            } 
+        }),
         ApiResponse({ status: 404, description: 'Nenhum evento encontrado com esse ID.' }),
         ApiResponse({ status: 500, description: 'Erro interno no servidor' })
     )

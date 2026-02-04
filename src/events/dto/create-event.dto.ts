@@ -3,8 +3,7 @@ import { Status } from "@prisma/client";
 import { Type } from "class-transformer";
 import { IsDate, IsEnum, IsNumber, IsString } from "class-validator";
 
-export class CreateEventDto 
-{
+export class CreateEventDto {
     @ApiProperty({ example: 'Férias', description: 'Título do seu evento' })
     @IsString()
     title: string;

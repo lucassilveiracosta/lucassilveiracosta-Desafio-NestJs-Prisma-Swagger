@@ -22,18 +22,12 @@ export class EventsService
       throw new ConflictException(`Você ja possui um evento agendado nesse horario!`)
     }
 
-
-
-
-    
     const { startDateTime, endDateTime } = createEventDto;
 
     if(new Date(endDateTime) <= new Date(startDateTime))
     {
       throw new BadRequestException(`Você tem que usar uma data de término após a data de início!`);
     }
-
-    
 
     return this.prisma.event.create({ data: createEventDto })
   }
