@@ -5,11 +5,11 @@ import { IsDate, IsEnum, IsNumber, IsString } from "class-validator";
 
 export class CreateEventDto 
 {
-    @ApiProperty({ example: 'Ocupado', description: 'Título do seu evento' })
+    @ApiProperty({ example: 'Férias', description: 'Título do seu evento' })
     @IsString()
     title: string;
 
-    @ApiProperty({ example: 'Trabalhando na Seed', description: 'Descrição do seu evento' })
+    @ApiProperty({ example: 'Praia de Boa Viagem', description: 'Descrição do seu evento' })
     @IsString()
     description: string;
 
