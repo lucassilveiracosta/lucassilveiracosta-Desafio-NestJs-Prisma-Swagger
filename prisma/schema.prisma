@@ -27,7 +27,7 @@ model User {
   //Relacionamento inverso: um usuario tem muitos eventos, então coloca [] para representar um array
   events          Event[]   
 
-  @@map("users") //Decorator do prisma para mapear no banco diretamente para tabela users
+  @@map("user") //Decorator do prisma para mapear no banco diretamente para tabela users
 }
 
 model Event {
@@ -42,9 +42,9 @@ model Event {
 
   //Relacionamento
   userId          Int  //FK
-  user            User         @relation(fields: [userId], references: [id])
+  user            User         @relation(fields: [userId], references: [id]) 
 
-  @@map("events") //Decorator do prisma para mapear no banco diretamente para tabela events
+  @@map("event") //Decorator do prisma para mapear no banco diretamente para tabela events
 }
 
 enum Status {

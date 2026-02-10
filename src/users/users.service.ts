@@ -48,6 +48,8 @@ export class UsersService
   {
     await this.findById(id);
 
+    await this.prisma.event.deleteMany({ where: { userId: id } }); //deletar todos os eventos relacionados a tal usuário
+
     return this.prisma.user.delete({
       where: { id: id },
     })

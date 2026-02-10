@@ -34,7 +34,7 @@ export class UsersController
 
   @Get('email/:email') //REQ     // esse email/:email ----> significa que ele vai procurar por email, pois se so fosse ":email" ele poderia confundir com o getbyID e dar erro 500
   @ApiGetOneUserByEmail()
-  findByEmail(@Param('email', ParseIntPipe) email: string) 
+  findByEmail(@Param('email') email: string) 
   {
     return this.usersService.findByEmail(email);
   }
