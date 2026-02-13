@@ -1,0 +1,47 @@
+
+
+services:
+  # --- BANCO DE DADOS (PostgreSQL) ---
+  db:
+    image: postgres:latest
+    container_name: projeto-db
+    restart: always
+    environment:
+      POSTGRES_USER: lucas
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: projeto
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql # Salva os dados no seu PC
+
+  # --- INTERFACE VISUAL (pgAdmin) ---
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: projeto-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: lucas@email.com
+      PGADMIN_DEFAULT_PASSWORD: senha
+    ports:
+      - "5051:80"
+    depends_on:
+      - db
+
+  # --- SUA API (NestJS) ---
+  api:
+    build: .
+    container_name: projeto-api
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      # Sobrescreve o localhost do .env para o nome do serviço 'db'
+      DATABASE_URL: "postgresql://lucas:senha@db:5432/projeto?schema=public"
+
+volumes:
+  pgdata:

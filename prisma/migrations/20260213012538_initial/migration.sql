@@ -2,7 +2,7 @@
 CREATE TYPE "Status" AS ENUM ('SCHEDULED', 'COMPLETED', 'CANCELED');
 
 -- CreateTable
-CREATE TABLE "users" (
+CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
     "fullName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -13,11 +13,11 @@ CREATE TABLE "users" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "events" (
+CREATE TABLE "event" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
@@ -28,14 +28,14 @@ CREATE TABLE "events" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
 
-    CONSTRAINT "events_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "event_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "users_cpf_key" ON "users"("cpf");
+CREATE UNIQUE INDEX "user_cpf_key" ON "user"("cpf");
 
 -- AddForeignKey
-ALTER TABLE "events" ADD CONSTRAINT "events_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "event" ADD CONSTRAINT "event_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
