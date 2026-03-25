@@ -23,7 +23,7 @@ export class CreateUserDto {
     @IsString()
     phoneNumber: string;
 
-    @ApiProperty({ example: 'AAAA-MM-DD', description: 'Data de nascimento do usuário' })
+    @ApiProperty({ example: '2019-12-12', description: 'Data de nascimento do usuário' })
     @IsDate()
     @Type(() => Date)
     birthDate: Date;

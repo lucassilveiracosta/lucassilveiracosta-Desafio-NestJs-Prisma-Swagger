@@ -17,7 +17,7 @@ export function ApiCreateUser() {
                     cpf: { type: 'string', example: '12345678910' },
                     password: { type: 'string', example: 'senha123'},
                     phoneNumber: { type: 'string', example: '(DDD) 9 1234-5678' },
-                    birthDate: { type: 'string', example: 'AAAA-MM-DD' },
+                    birthDate: { type: 'string', example: '2026-03-25' },
                     createdAt: { type: 'string', example: 'AAAA-MM-DD' },
                     updatedAt: { type: 'string', example: 'AAAA-MM-DD' }
                 },
