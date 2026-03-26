@@ -12,12 +12,12 @@ export class CreateEventDto {
     @IsString()
     description: string;
 
-    @ApiProperty({ example: 'AAAA-MM-DD', description: 'Data de início do seu evento' })
+    @ApiProperty({ example: '2018-08-19', description: 'Data de início do seu evento' })
     @IsDate()
     @Type(() => Date)
     startDateTime: Date;
 
-    @ApiProperty({ example: 'AAAA-MM-DD', description: 'Data de finalização do seu evento '})
+    @ApiProperty({ example: '2018-08-30', description: 'Data de finalização do seu evento '})
     @IsDate()
     @Type(() => Date)
     endDateTime: Date; 

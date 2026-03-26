@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, ParseIntPipe, Put } from '@
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { ApiCreateUser, ApiDeleteUser, ApiGetOneUserByEmail, ApiGetOneUserById, ApiGetUser, ApiPutUser } from './users.swagger';
 
 @ApiTags('users')
